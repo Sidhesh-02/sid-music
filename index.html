@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sid-Workspace</title>
+    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap');
+        [x-cloak]
+        {
+            display: none;
+        }
+        .swiper-wrapper .swiper-slide
+        {
+            padding: 10px 10px 10px 0px;
+        }
+        .enable
+        {
+            opacity: 1;
+        }
+        .disable 
+        {
+            opacity: 0.2;
+        }
+        @keyframes spin 
+        {
+            to 
+            {
+                transform: rotate(360deg);
+            }
+        }
+        .animate-spin 
+        {
+            animation: spin 4s linear infinite;
+        }
+        .transform {
+            transform: scale-x(-1);
+        }
+        #btn-back-to-top 
+        {
+            position: fixed;
+            display: none;
+        }
+        .dark-mode
+        {
+            background-image: url(img/art4.jpg); 
+        }
+    </style>   
+</head>
+
+<body style="font-family: 'Chakra Petch', sans-serif;" class="bg-[url(img/ski.jpg)] bg-cover md:bg-right-top">
+    <header>
+        <section class="mt-10 mx-4 md:mx-10">
+            
+            <nav class="" x-data="{open:false}">
+                <div class="flex justify-between items-center rounded-3xl bg-black bg-opacity-10 p-4 md:px-6 md:py-4">
+                    <div>
+                        <a id="anchor" class="" href="index.html">
+                            <img class="saturate-100 w-14 h-10 md:w-16 md:h-12" src="img/logo.png" alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <div id="side-menu" class="bg-red-950 w-[200px] md:w-[195px] h-screen fixed top-0 right-[-250px] z-50 p-5 flex flex-col space-y-5 text-white duration-300">
+                            <span href="javascript:void(0)" class="text-right text-4xl" onclick="closeMenu()">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="cursor-pointer h-8 w-8 md:h-9 md:w-9 animate-spin">
+                                    <path d="M15.75 8.25a.75.75 0 01.75.75c0 1.12-.492 2.126-1.27 2.812a.75.75 0 11-.992-1.124A2.243 2.243 0 0015 9a.75.75 0 01.75-.75z" />
+                                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM4.575 15.6a8.25 8.25 0 009.348 4.425 1.966 1.966 0 00-1.84-1.275.983.983 0 01-.97-.822l-.073-.437c-.094-.565.25-1.11.8-1.267l.99-.282c.427-.123.783-.418.982-.816l.036-.073a1.453 1.453 0 012.328-.377L16.5 15h.628a2.25 2.25 0 011.983 1.186 8.25 8.25 0 00-6.345-12.4c.044.262.18.503.389.676l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.575 15.6z" clip-rule="evenodd" />
+                                </svg>   
+                            </span>
+                            <a class="select-none hover:text-green-300" href="/index.html">Home</a>
+                            <a class="select-none hover:text-green-300" href="/blogs.html">Blogs</a>
+                            <a class="select-none hover:text-green-300" x-on:click="scrollToBottom(),closeMenu()">About Us</a>
+                            <span class="cursor-pointer hover:text-green-300" onclick="dark_mode()">Dark mode</span>
+                        </div>
+                    
+                        <main>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="cursor-pointer text-4xl h-8 w-8 md:h-9 md:w-9" onclick="openMenu()">
+                                <path d="M15.75 8.25a.75.75 0 01.75.75c0 1.12-.492 2.126-1.27 2.812a.75.75 0 11-.992-1.124A2.243 2.243 0 0015 9a.75.75 0 01.75-.75z" />
+                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM4.575 15.6a8.25 8.25 0 009.348 4.425 1.966 1.966 0 00-1.84-1.275.983.983 0 01-.97-.822l-.073-.437c-.094-.565.25-1.11.8-1.267l.99-.282c.427-.123.783-.418.982-.816l.036-.073a1.453 1.453 0 012.328-.377L16.5 15h.628a2.25 2.25 0 011.983 1.186 8.25 8.25 0 00-6.345-12.4c.044.262.18.503.389.676l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.575 15.6z" clip-rule="evenodd" />
+                            </svg> 
+                        </main>
+                    </div>
+                </div>   
+            </nav> 
+        </section>
+
+        <section id="sec" class="-mt-4 md:my-10 mx-11 text-white rounded-3xl h-full md:bg-black md:bg-opacity-10">
+            <div x-data="{ change: false }" class="py-10 md:flex md:flex-row-reverse md:justify-between md:items-center md:align-middle">
+                <div class="w-48 h-48 md:h-80 md:w-80 md:mx-auto md:pt-4 relative overflow-hidden">
+                    <img id="bird" class="w-full h-full brightness-0 invert-0" :src="change ? 'img/bird1.gif' : 'img/birdr.png'" @mouseover="change = true" @mouseout="change = false">
+                    <img class="-z-10 -rotate-[120deg] absolute bottom-0 right-0 w-auto h-32 md:h-52" src="img/flowers.png" alt=""> 
+                </div>
+                <div class="w-72 h-64 md:w-2/5 md:h-72 mx-auto md:text-left">
+                    <h1 style="font-family: sans-serif; font-weight: 500; text-shadow: 2px 2px rgba(0, 0, 0, 0.7);" class="md:pb-2 text-4xl md:text-5xl text-orange-100">Album Concept</h1>
+                    <h1 style="text-shadow: 1px 1px rgba(0, 0, 0, 0.2);" class="pt-1 pl-1 md:pl-2 md:pt-2 font-normal text-md md:text-lg">Using floral symbolism to convey a variety of emotions through my music, I took a unique approach with my floriography album. Each song has been carefully composed to express a different emotion connected to a certain flower. I made the finest music I was able to, ranging from the cheerful Daffodil to Sorrow of a Belladonna. Therefore, I would appreciate that you give my music at least one listen.
+                    </h1>
+                </div>
+            </div>
+        </section>
+        
+    </header>
+
+    <main class="select-none relative px-6 my-20 md:px-16 md:mb-36 text-white"> <!--body-->
+
+        <div class="flex justify-between items-center mr-2" >
+            <h1 style="font-family: sans-serif; font-weight: 500; text-shadow: 2px 2px rgba(0, 0, 0, 0.7);" class="text-3xl font-semibold text-orange-100">floriography</h1>
+            <div>
+                <button id="prev" onclick="swiper.slidePrev()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
+                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-4.28 9.22a.75.75 0 000 1.06l3 3a.75.75 0 101.06-1.06l-1.72-1.72h5.69a.75.75 0 000-1.5h-5.69l1.72-1.72a.75.75 0 00-1.06-1.06l-3 3z" clip-rule="evenodd" />
+                    </svg>   
+                </button>
+                <button id="next" onclick="swiper.slideNext()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
+                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" clip-rule="evenodd" />
+                    </svg>   
+                </button>
+            </div> 
+        </div>
+
+        <!--Music Cards-->
+        <section class="text-white">
+            
+            <div class="swiper mySwiper">                
+                <div class="swiper-wrapper">
+                       
+                    <div class="swiper-slide" x-data="{ play1: false }"> <!--1st Card-->
+                        <!--Slide container-->
+                        <div class="relative"> 
+                            <img class="w-full h-[330px] rounded-lg object-cover brightness-110 opacity-90" x-bind:src="play1 ? 'img/tb.gif' : 'img/tb.png'" x-ref="image" alt="Sorry"> 
+                            <span style="font-family: 'Noto Serif JP', serif;" class="absolute top-[40%] w-full text-center text-5xl font-bold ">ハッピー</span> <!--Happy-->
+                            <div class="rounded-b-lg inline-block h-max w-full absolute bottom-0 "> <!--Player Container-->
+                                <div class="flex items-center "> <!--Player Options-->
+                                    <div class="pl-2 py-2">
+                                        <div x-show="!play1"><!--play-->
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-6 h-8 cursor-pointer" @click="play1 = true , $refs.audio1.play() , $refs.image.change()">
+                                                <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <div x-show="play1"><!--pause-->
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-6 h-8 cursor-pointer" @click="play1 = false , $refs.audio1.pause()" x-show="!$refs.audio1.ended" >
+                                                <path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>  
+                                    <span class="p-2">Orchid</span>
+                                </div>
+                                <audio x-ref="audio1" @ended="play1 = false"> <!--Audio File-->
+                                    <source src="audio/Happy_.mp3" type="audio/mpeg" >
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide" x-data="{ play2: false }"> <!--2nd Card-->
+                        <div class="relative">
+                            <img class="w-full h-[330px] rounded-lg object-cover hue-rotate-180 opacity-90" x-bind:src="play2 ? 'img/tb.gif' : 'img/tb.png'" x-ref="image" alt="Sorry"> 
+                            <span style="font-family: 'Noto Serif JP', serif;" class="absolute top-[40%] w-full text-center text-5xl font-bold ">恐れ</span> <!--fear-->
+                            <div class="rounded-b-lg inline-block h-max w-full absolute bottom-0 "> <!--Player Container-->
+                                <div class="flex items-center "> <!--Player Options-->
+                                    <div class="pl-2 py-2">
+                                        <div x-show="!play2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-6 h-8 cursor-pointer" @click="play2 = true , $refs.audio2.play()">
+                                                <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <div x-show="play2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-6 h-8 cursor-pointer" @click="play2 = false , $refs.audio2.pause()" x-show="!$refs.audio2.ended">
+                                                <path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>  
+                                    <span class="p-2">Belladonna</span>
+                                </div>
+                                <div>
+                                    <audio x-ref="audio2" @ended="play2 = false"> <!--Audio File-->
+                                        <source src="audio/Fear_.mp3" type="audio/mpeg" >
+                                    </audio>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <div class="swiper-slide" x-data="{ play3: false }"> <!--3rd Card-->
+                        <div class="relative">
+                            <img class="w-full h-[330px] rounded-lg object-cover brightness-75 sepia-[80%] -hue-rotate-90 opacity-90" x-bind:src="play3 ? 'img/tb.gif' : 'img/tb.png'" x-ref="image" alt="Sorry"> 
+                            <span style="font-family: 'Noto Serif JP', serif;" class="absolute top-[40%] w-full text-center text-5xl font-bold ">悲しい</span> <!--sad-->
+                            <div class="rounded-b-lg inline-block h-max w-full absolute bottom-0"> <!--Player Container-->
+                                <div class="flex items-center "> <!--Player Options-->
+                                    <div class="pl-2 py-2">
+                                        <div x-show="!play3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-6 h-8 cursor-pointer" @click="play3 = true , $refs.audio3.play()">
+                                                <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <div x-show="play3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-6 h-8 cursor-pointer" @click="play3 = false , $refs.audio3.pause()"  x-show="!$refs.audio3.ended">
+                                                <path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>  
+                                    <span class="p-2">Purple Hyacinth</span>
+                                </div>
+                                <audio x-ref="audio3" @ended="play3 = false"> <!--Audio File-->
+                                    <source src="audio/Sad_.mp3" type="audio/mpeg" >
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <div class="swiper-slide" x-data="{ play4: false }"> <!--4th Card-->
+                        <div class="relative">
+                            <img class="w-full h-[330px] rounded-lg object-cover sepia-[50%] brightness-90 opacity-90" x-bind:src="play4 ? 'img/tb.gif' : 'img/tb.png'" x-ref="image" alt="Sorry"> 
+                            <span style="font-family: 'Noto Serif JP', serif;" class="absolute top-[40%] w-full text-center text-5xl font-bold ">落ち着いて</span> <!--Calm-->
+                            <div class="rounded-b-lg inline-block h-max w-full absolute bottom-0 "> <!--Player Container-->
+                                <div class="flex items-center "> <!--Player Options-->
+                                    <div class="pl-2 py-2">
+                                        <div x-show="!play4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-6 h-8 cursor-pointer" @click="play4 = true , $refs.audio4.play()">
+                                                <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <div x-show="play4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-6 h-8 cursor-pointer" @click="play4 = false , $refs.audio4.pause()" x-show="!$refs.audio4.ended">
+                                                <path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>  
+                                    <span class="p-2">Lavender</span>
+                                </div>
+                                <audio x-ref="audio4" @ended="play4 = false"> <!--Audio File-->
+                                    <source src="audio/Calm_.mp3" type="audio/mpeg" >
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+                      
+                    <div class="swiper-slide" x-data="{ play5: false }"> <!--5th Card-->
+                        <div class="relative">
+                            <img x-bind:src="play5 ? 'img/tb.gif' : 'img/tb.png'" x-ref="image" alt="Sorry" class="w-full h-[330px] rounded-lg object-cover brightness-75 sepia-[30%] -hue-rotate-60 opacity-90"> 
+                            <span style="font-family: 'Noto Serif JP', serif;" class="absolute top-[40%] w-full text-center text-5xl font-bold ">愛</span> <!--Love-->
+                            <div class="rounded-b-lg inline-block h-max w-full absolute bottom-0"> <!--Player Container-->
+                                <div class="flex items-center "> <!--Player Options-->
+                                    <div class="pl-2 py-2">
+                                        <div x-show="!play5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-6 h-8 cursor-pointer" @click="play5 = true , $refs.audio5.play()">
+                                                <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <div x-show="play5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-6 h-8 cursor-pointer" @click="play5 = false , $refs.audio5.pause()" x-show="!$refs.audio5.ended">
+                                                <path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>  
+                                    <span class="p-2">White Rose</span>
+                                </div>
+                                <audio x-ref="audio5" @ended="play5 = false"> <!--Audio File-->
+                                    <source src="audio/Love_.mp3" type="audio/mpeg" >
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <div class="swiper-slide" x-data="{ play6: false }"> <!--6th Card-->
+                        <div class="relative">
+                            <img class="w-full h-[330px] rounded-lg object-cover contrast-[120%] brightness-[120%] -hue-rotate-90 sepia-[30%] opacity-90" x-bind:src="play6 ? 'img/tb.gif' : 'img/tb.png'" x-ref="image" alt="Sorry"> 
+                            <span style="font-family: 'Noto Serif JP', serif;" class="absolute top-[40%] w-full text-center text-5xl font-bold ">激怒</span> <!--Rage-->
+                            <div class="rounded-b-lg inline-block h-max w-full absolute bottom-0"> <!--Player Container-->
+                                <div class="flex items-center "> <!--Player Options-->
+                                    <div class="pl-2 py-2">
+                                        <div x-show="!play6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-6 h-8 cursor-pointer" @click="play6 = true , $refs.audio6.play()">
+                                                <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <div x-show="play6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-6 h-8 cursor-pointer" @click="play6 = false , $refs.audio6.pause()" x-show="!$refs.audio6.ended">
+                                                <path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>  
+                                    <span class="p-2">Thistle</span>
+                                </div>
+                                <audio x-ref="audio6" @ended="play6 = false"> <!--Audio File-->
+                                    <source src="audio/Rage_.mp3" type="audio/mpeg" >
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        
+        </section>
+    </main>
+    
+    <footer class="md:bg-[url(img/noisy.png)] md:h-full py-10 md:py-2">
+        <div class="bg-[url(img/noisy.png)] md:bg-transparent rounded-lg mx-auto flex flex-col items-center h-full w-[300px] md:rounded-none md:w-full md:h-full p-2"> <!--about container-->
+            <div class="mt-10 h-28 w-28 rounded-full overflow-hidden md:h-48 md:w-48 ">
+                <img src="img/sid.jpg" alt="">
+            </div>
+            <div class="p-4">
+                <div class="text-white text-center">
+                    <h1 class="text-xl font-semibold pt-1 md:text-2xl pb-2">Sid</h1>
+                    <p class="text-sm md:text-xl md:flex-wrap font-thin md:w-96">For me, Curiosity has been catalyst for both self-destruction & growth. Exploring new things made me realize why I can't get along with everyone. My desire for creation & growth won't let me die, but neither my habits let me survive. But I am thankful for the people in my life who actually made me what I am.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-4 w-max mb-2"> <!--Icons-->
+                <a class="p-2 opacity-90" href="https://www.instagram.com/_sid.02/">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: white;"><path d="M20.947 8.305a6.53 6.53 0 0 0-.419-2.216 4.61 4.61 0 0 0-2.633-2.633 6.606 6.606 0 0 0-2.186-.42c-.962-.043-1.267-.055-3.709-.055s-2.755 0-3.71.055a6.606 6.606 0 0 0-2.185.42 4.607 4.607 0 0 0-2.633 2.633 6.554 6.554 0 0 0-.419 2.185c-.043.963-.056 1.268-.056 3.71s0 2.754.056 3.71c.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632 6.584 6.584 0 0 0 2.185.45c.963.043 1.268.056 3.71.056s2.755 0 3.71-.056a6.59 6.59 0 0 0 2.186-.419 4.615 4.615 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.187.043-.962.056-1.267.056-3.71-.002-2.442-.002-2.752-.058-3.709zm-8.953 8.297c-2.554 0-4.623-2.069-4.623-4.623s2.069-4.623 4.623-4.623a4.623 4.623 0 0 1 0 9.246zm4.807-8.339a1.077 1.077 0 0 1-1.078-1.078 1.077 1.077 0 1 1 2.155 0c0 .596-.482 1.078-1.077 1.078z"></path><circle cx="11.994" cy="11.979" r="3.003"></circle></svg>
+                </a>
+                <a class="p-2 opacity-90" href="https://www.youtube.com/channel/UCTXmxuNq8e-b6s4grt241zQ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: white;"><path d="M21.593 7.203a2.506 2.506 0 0 0-1.762-1.766C18.265 5.007 12 5 12 5s-6.264-.007-7.831.404a2.56 2.56 0 0 0-1.766 1.778c-.413 1.566-.417 4.814-.417 4.814s-.004 3.264.406 4.814c.23.857.905 1.534 1.763 1.765 1.582.43 7.83.437 7.83.437s6.265.007 7.831-.403a2.515 2.515 0 0 0 1.767-1.763c.414-1.565.417-4.812.417-4.812s.02-3.265-.407-4.831zM9.996 15.005l.005-6 5.207 3.005-5.212 2.995z"></path></svg>
+                </a>
+                <a class="p-2 opacity-90" href="https://github.com/Sidhesh-02">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: white"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg>
+                </a>
+                <a class="p-2 opacity-90" href="https://www.linkedin.com/in/sidhesh-bankar-97b484252">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: white;"><path d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM8.339 18.337H5.667v-8.59h2.672v8.59zM7.003 8.574a1.548 1.548 0 1 1 0-3.096 1.548 1.548 0 0 1 0 3.096zm11.335 9.763h-2.669V14.16c0-.996-.018-2.277-1.388-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248h-2.667v-8.59h2.56v1.174h.037c.355-.675 1.227-1.387 2.524-1.387 2.704 0 3.203 1.778 3.203 4.092v4.71z"></path></svg>
+                </a>
+            </div>
+        </div> 
+        <div class="hidden md:contents">
+            <button class="inline-block p-3 bg-white rounded-full shadow-md hover:bg-red-100 hover:shadow-lg transition duration-150 ease-in-out bottom-5 right-5" id="btn-back-to-top">
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" class="w-4 h-4" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"></path></svg>
+            </button>
+        </div>   
+    </footer>
+    <div id="loading-overlay" class="bg-opacity-95 fixed top-0 h-[100vh] w-[100vw] grid justify-items-center content-center bg-black">
+        <img class="animate-spin hue-rotate-60 drop-shadow-lg w-12 h-12 md:w-16 md:h-16" src="img/butterfly.svg" alt="">
+        <p class="text-white text-lg p-2">&nbsp;Loading...</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="sout.js"></script>
+
+</body>   
+</html>
